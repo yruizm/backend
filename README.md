@@ -6,7 +6,7 @@ Reto siigo-backend Back
 
 Git command:
 
-1. `git clone https://github.com/yruizm/siigo-backend.git`
+1. `git clone https://github.com/yruizm/backend.git`
 2. `cd siigo-backend`
 
 
