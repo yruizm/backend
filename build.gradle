@@ -1,0 +1,75 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    jcenter()
+    mavenCentral()
+
+}
+
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.0"
+    }
+}
+
+
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:3.6.9',
+            'net.serenity-bdd:serenity-rest-assured:3.6.9',
+            'net.serenity-bdd:serenity-ensure:3.6.9',
+            'net.serenity-bdd:serenity-screenplay:3.6.9',
+            'net.serenity-bdd:serenity-screenplay-webdriver:3.6.9',
+            'net.serenity-bdd:serenity-cucumber:3.6.9',
+            'org.hibernate:hibernate-core:5.4.28.Final',
+            'net.serenity-bdd:serenity-junit:3.6.9',
+            'net.serenity-bdd:serenity-core:3.6.9',
+            'io.cucumber:cucumber-junit:5.5.0',
+            'com.google.code.gson:gson:2.8.9',
+            'io.cucumber:cucumber-core:5.5.0',
+            'org.json:json:20220320',
+            'jline:jline:2.13'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.6.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.1'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.17.1'
+
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.0.3',
+            'net.serenity-bdd:serenity-junit:3.6.9',
+            'net.serenity-bdd:serenity-core:3.6.9',
+            'org.slf4j:slf4j-simple:2.0.3',
+            'junit:junit:4.13.1'
+// https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+
+}
+
+test.finalizedBy(aggregate)
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+gradle.startParameter.continueOnFailure = true
+
